@@ -34,7 +34,7 @@ RSpec.describe 'patient index page' do
 
   it 'will have the patients ordered alphabetically' do
     visit patients_path
-    withing("#adult_patients") do
+    within("#adult_patients") do
       expect(@patient_4.name).to appear_before(@patient_2.name)
       expect(@patient_2.name).to appear_before(@patient_1.name)
     end
