@@ -1,5 +1,7 @@
 <h1>All Our Patients</h1>
 
-<% @patients.adult_patients.each do |patient| %>
-  <p><%= patient.name %></p>
-<% end %>
+<section id="adult_patients">
+  <% @patients.adult_patients.each do |patient| %>
+    <p><%= patient.name %></p>
+  <% end %>
+</section>

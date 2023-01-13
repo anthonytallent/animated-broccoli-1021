@@ -23,17 +23,20 @@ RSpec.describe 'patient index page' do
   it 'has all patients ages greater than 18' do
     visit patients_path
 
-    expect(page).to have_content(@patient_1.name)
-    expect(page).to have_content(@patient_2.name)
-    expect(page).to have_content(@patient_4.name)
+    within("#adult_patients") do
+      expect(page).to have_content(@patient_1.name)
+      expect(page).to have_content(@patient_2.name)
+      expect(page).to have_content(@patient_4.name)
 
-    expect(page).to_not have_content(@patient_3.name)
+      expect(page).to_not have_content(@patient_3.name)
+    end
   end
 
   it 'will have the patients ordered alphabetically' do
     visit patients_path
-
-    expect(@patient_4.name).to appear_before(@patient_2.name)
-    expect(@patient_2.name).to appear_before(@patient_1.name)
+    withing("#adult_patients") do
+      expect(@patient_4.name).to appear_before(@patient_2.name)
+      expect(@patient_2.name).to appear_before(@patient_1.name)
+    end
   end
 end
