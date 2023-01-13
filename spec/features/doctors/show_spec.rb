@@ -36,4 +36,20 @@ RSpec.describe 'doctor show page' do
       expect(page).to have_content(@doctor.hospital.name)
     end
   end
+
+  it 'can delete a patient' do
+    visit doctor_path(@doctor)
+
+    within("#patients") do
+      expect(page).to have_content(@patient_1.name)
+
+      expect(page).to have_button("Delete Steve")
+
+      click_button "Delete Steve"
+
+      expect(current_path).to eq(doctor_path(@doctor))
+
+      expect(page).to_not have_content(@patient_1.name)
+    end
+  end
 end
