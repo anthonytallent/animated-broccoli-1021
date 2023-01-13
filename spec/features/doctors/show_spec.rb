@@ -27,20 +27,20 @@ RSpec.describe 'doctor show page' do
     expect(page).to have_content(@doctor_1.university)
   end
 
-  it 'shows the doctors patients' do
+  it 'shows the hospital the doctor works at' do
+    visit doctor_path(@doctor_1)
+    
+    within("#hospital") do
+      expect(page).to have_content(@doctor_1.hospital.name)
+    end
+  end
+  
+  it 'shows all of the doctors patients' do
     visit doctor_path(@doctor_1)
 
     within("#patients") do
       expect(page).to have_content(@patient_1.name)
       expect(page).to have_content(@patient_2.name)
-    end
-  end
-
-  it 'shows the hospital the doctor works at' do
-    visit doctor_path(@doctor_1)
-
-    within("#hospital") do
-      expect(page).to have_content(@doctor_1.hospital.name)
     end
   end
 
