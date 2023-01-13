@@ -4,8 +4,8 @@ RSpec.describe Patient do
   it {should have_many :doctor_patients}
   it {should have_many(:doctors).through(:doctor_patients)}
 
-  describe "#adult_patients" do
-    it "returns all patients over 18 in alphabetical order" do
+  describe "class methods"
+    before :each do
       @hospital = Hospital.create!(name: "Sacred Heart")
 
       @doctor_1 = Doctor.create!(name: "Stan", specialty: "Cardiology", university: "U of R", hospital_id: @hospital.id)
@@ -22,8 +22,11 @@ RSpec.describe Patient do
       DoctorPatient.create!(doctor_id: @doctor_2.id, patient_id: @patient_2.id)
       DoctorPatient.create!(doctor_id: @doctor_2.id, patient_id: @patient_3.id)
       DoctorPatient.create!(doctor_id: @doctor_2.id, patient_id: @patient_4.id)
-
-      expect(Patient.adult_patients).to eq([@patient_4, @patient_2, @patient_1])
     end
+
+    describe "#adult_patients" do
+      it "returns all patients over 18 in alphabetical order" do
+        expect(Patient.adult_patients).to eq([@patient_4, @patient_2, @patient_1])
+      end
   end
 end
