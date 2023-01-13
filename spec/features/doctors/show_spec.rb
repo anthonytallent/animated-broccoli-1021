@@ -61,6 +61,8 @@ RSpec.describe 'doctor show page' do
 
     visit doctor_path(@doctor_2)
 
-    expect(page).to have_content("Steve")
+    within("#patients") do
+      expect(page).to have_content(@patient_1.name)
+    end
   end
 end
